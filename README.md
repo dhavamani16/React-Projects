@@ -1,4 +1,4 @@
-# React Projects 🚀
+# React Projects 
 
 This repository contains multiple React projects built using:
 - React
