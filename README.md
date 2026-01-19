@@ -7,6 +7,6 @@ This repository contains multiple React projects built using:
 - CSS
 
 ## Projects
-- fir-react (initial setup)
+- First-react (initial setup)
 
 More projects coming soon.
