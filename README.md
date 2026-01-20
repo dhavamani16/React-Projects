@@ -7,6 +7,6 @@ This repository contains multiple React projects built using:
 - CSS
 
 ## Projects
-- First-react (initial setup)
+- ReactFunFacts (initial setup)
 
 More projects coming soon.
