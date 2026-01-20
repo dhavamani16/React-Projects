@@ -1,0 +1,70 @@
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+nav{
+  background: #F55A5A;
+  width: 140;
+  height: 24;
+  angle: 0 deg;
+  opacity: 1;
+  top: 16px;
+  left: 213px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: center;
+  color:white;
+  margin-bottom: 20px;
+
+}
+nav h1{
+  color: #ffff;
+  margin-left:10px;
+  font-weight: 500;
+  font-size: 14.4px;
+  font-family: 'Inter', sans-serif;
+}
+article.journal-entry {
+  display: flex;
+  gap: 20px;
+}
+
+.main-image-container {
+  width: 200px;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.entry-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+
+.main-image{
+  width: 550;
+height: 704;
+angle: 0 deg;
+opacity: 1;
+
+}
+.trip-dates{
+  width: 319;
+height: 11;
+angle: 0 deg;
+opacity: 1;
+top: 183px;
+left: 184px;
+
+}
