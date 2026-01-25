@@ -1,45 +1,75 @@
+import React from "react";
+import ClaudeRecipe from "./claudRecipe";
+import IngredientsList from "./IngredientsList";
+
 export default function Main() {
+  const [ingredients, setIngredients] = React.useState([
+    "chicken breasts", "most of the main spices", "olive oil", "heavy cream", "parmesan cheese", "spinach"
+  ]);
 
-    /**
-     * Challenge: Update our app so that when the user enters a
-     * new ingredient and submits the form, it adds that new
-     * ingredient to our list!
-     */
+  const [recipe, setRecipe] = React.useState("");
 
+  const [loading, setLoading] = React.useState(false);
 
-    const ingredients = ["Chicken", "Oregano", "Tomatoes"]
+  async function handleGetRecipe() {
+    setLoading(true);
+    setRecipe("");
 
-    const ingredientsListItems = ingredients.map(ingredient => (
-        <li key={ingredient}>{ingredient}</li>
-    ))
+    try {
+      const response = await fetch("http://localhost:5000/api/recipe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ingredients }),
+      });
 
-    function handleSubmit(event) {
-        /**
-         * Like before, don't worry about this FormData stuff yet.
-         * Just use the newIngredient below to help you finish the
-         * challenge.
-         */
-        
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
-        const newIngredient = formData.get("ingredient")
-        setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+      const data = await response.json();
+
+      if (data.recipe) {
+        setRecipe(data.recipe);
+      } else {
+        setRecipe("Couldn't generate a recipe. Try again later.");
+      }
+    } catch (error) {
+      console.error("Error fetching recipe:", error);
+      setRecipe("Error fetching recipe. Please try again later.");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    return (
-        <main>
-            <form onSubmit={handleSubmit} className="add-ingredient-form">
-                <input
-                    type="text"
-                    placeholder="e.g. oregano"
-                    aria-label="Add ingredient"
-                    name="ingredient"
-                />
-                <button>Add ingredient</button>
-            </form>
-            <ul>
-                {ingredientsListItems}
-            </ul>
-        </main>
-    )
+  const ingredientsListItems = ingredients.map((ingredient) => (
+    <li key={ingredient}>{ingredient}</li>
+  ));
+
+  function addIngredient(formData) {
+    const newIngredient = formData.get("ingredient");
+    if (newIngredient) {
+      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+    }
+  }
+
+  return (
+    <main>
+      <form action={addIngredient} className="add-ingredient-form">
+        <input
+          type="text"
+          placeholder="e.g. oregano"
+          aria-label="Add ingredient"
+          name="ingredient"
+        />
+        <button>Add ingredient</button>
+      </form>
+
+      {ingredients.length > 0 && <IngredientsList
+        ingredientsListItems={ingredientsListItems}
+        ingredients={ingredients}
+        handleGetRecipe={handleGetRecipe}
+        loading={loading}
+      />}
+
+      {recipe && <ClaudeRecipe recipe={recipe} />}
+    </main>
+  );
 }
