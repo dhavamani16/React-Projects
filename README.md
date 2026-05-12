@@ -141,7 +141,6 @@ The purpose of this project is to demonstrate how React can be used to build int
 - Loading and error handling  
 - Advanced state management  
 - Additional React hooks  
-
 ---
 
 
